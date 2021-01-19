@@ -31,10 +31,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public/images/favicon.ico')));
 
 // Mount base router on app, after setting up other middleware
-const baseRouter = require('./routes');
-
+const baseRouter = require('./routes/index');
 app.use('/', baseRouter);
 app.use('/celebrities', baseRouter);
+
+//If I use separate js files for routes, do not work. All in index.js works
+//const celebrities = require('./routes/celebrities');
+//app.use('/celebrities', celebrities);
 
 // Catch 404 and render a not-found.hbs template
 app.use((req, res, next) => {
